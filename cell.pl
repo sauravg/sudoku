@@ -61,37 +61,3 @@ solve_block :-
    	add_value_at(X,Y,V),
    	write_line(X, Y, V),
 	has_empty.
-
-	/*
-repeat_until_all_solved :-
-	all_solved ; repeat.
-*/
-
-/*
-empty(X,Y) :- \+(value_at(X,Y,_)), \+(deduced_value_at(X, Y, _)).
-*/
-
-/* X, Y must be instantiated, not V */
-/*
-find_value_for(X,Y, V) :-
-	value_at(X,Y,V), ! % if X,Y has a value, just return it and kill backtracking over it
-   	;
-   	digit(V1), avail(V1), V is V1.
-*/
-
-/*
-avail(V) :-
-	\+(value_at(_, _, V)),
-	\+(deduced_value_at(_, _, V)),
-   	V @>= 1, V @=< 9.
-*/
-
-/* all three args must be instantiated */
-/*
-can_fill(X,Y,V) :-
-	value_at(X,Y,V), ! % look no further if V is the value at X,Y
-   	;
-   	empty(X,Y),
-   	avail(V).
-	*/
-
