@@ -47,6 +47,9 @@ digit(7).
 digit(8).
 digit(9).
 
+/* GNU prolog doesn't seem to define the 'not' predicate mentioned in Clocksin & Mellish */
+not(P) :- \+(P).
+
 not_equal(A, B) :- B \== A.
 
 base3(A, V) :- V is 3*(A//3).
@@ -69,15 +72,15 @@ neighbour(A, B) :- index(I), in_same_block(A, I), B is I.
 
 filled(X,Y) :- value_at(X,Y,_), ! ; clause(deduced_value_at(X,Y,_), _).
 
-empty(X,Y) :- \+(filled(X,Y)).
+empty(X,Y) :- not(filled(X,Y)).
 
 is_value_at(X,Y, V) :- value_at(X,Y,V), ! ; clause(deduced_value_at(X,Y,V), _).
 
 unique_in_row(Row, Val) :-
-	\+(is_value_at(Row, _, Val)).
+	not(is_value_at(Row, _, Val)).
 
 unique_in_column(Column, Val) :-
-	\+(is_value_at(_, Column, Val)).
+	not(is_value_at(_, Column, Val)).
 
 exists_in_block(Row, Col, V) :-
 	neighbour(Row, X),
@@ -87,7 +90,7 @@ exists_in_block(Row, Col, V) :-
 	V == V1.
 
 unique_in_block(Row, Col, V) :-
-	\+(exists_in_block(Row, Col, V)).
+	not(exists_in_block(Row, Col, V)).
 
 avail(X, Y, V) :-
 	unique_in_block(X, Y, V),
