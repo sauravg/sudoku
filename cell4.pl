@@ -16,12 +16,62 @@ value_at(3,0,4).
 value_at(3,3,2).
 */
 
+/*
 value_at(0,1,3).
 value_at(0,2,2).
 value_at(1,3,3).
 value_at(2,0,1).
 value_at(3,1,4).
 value_at(3,2,1).
+*/
+
+/*
+value_at(0,0,2).
+value_at(1,1,4).
+value_at(1,2,3).
+value_at(2,1,2).
+value_at(2,2,1).
+value_at(3,3,3).
+*/
+
+/*
+value_at(0,1,1).
+value_at(0,3,4).
+value_at(1,0,4).
+value_at(2,3,2).
+value_at(3,0,2).
+value_at(3,2,3).
+*/
+
+value_at(0,4,1).
+value_at(0,5,5).
+value_at(0,6,6).
+value_at(0,8,9).
+value_at(1,1,2).
+value_at(1,3,7).
+value_at(1,8,1).
+value_at(2,0,9).
+value_at(2,7,7).
+value_at(3,1,1).
+value_at(3,4,9).
+value_at(3,5,8).
+value_at(3,8,5).
+value_at(4,2,6).
+value_at(4,6,9).
+value_at(5,0,3).
+value_at(5,3,5).
+value_at(5,4,7).
+value_at(5,7,6).
+value_at(6,1,4).
+value_at(6,8,2).
+value_at(7,0,2).
+value_at(7,5,4).
+value_at(7,7,9).
+value_at(8,0,7).
+value_at(8,2,5).
+value_at(8,3,1).
+value_at(8,4,2).
+
 
 
 
@@ -35,11 +85,21 @@ index(0).
 index(1).
 index(2).
 index(3).
+index(4).
+index(5).
+index(6).
+index(7).
+index(8).
 
 digit(1).
 digit(2).
 digit(3).
 digit(4).
+digit(5).
+digit(6).
+digit(7).
+digit(8).
+digit(9).
 
 /* GNU prolog doesn't seem to define the 'not' predicate mentioned in Clocksin & Mellish */
 not(P) :- \+(P).
@@ -47,7 +107,7 @@ not_both(A, B) :- not(A), ! ; not(B), !.
 
 not_equal(A, B) :- B \== A.
 
-block_size(2).
+block_size(3).
 board_size(N) :- block_size(S), N is S*S.
 max_index(M) :- board_size(S), M is S - 1.
 
