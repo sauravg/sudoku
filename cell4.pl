@@ -1,76 +1,29 @@
-/*
-value_at(0,1,2).
-value_at(0,3,1).
-value_at(1,2,2).
-value_at(2,1,4).
-value_at(3,0,3).
-value_at(3,2,4).
-*/
-
-/*
-value_at(0,0,1).
-value_at(0,3,3).
-value_at(1,1,4).
-value_at(2,2,3).
-value_at(3,0,4).
-value_at(3,3,2).
-*/
-
-/*
-value_at(0,1,3).
-value_at(0,2,2).
-value_at(1,3,3).
-value_at(2,0,1).
-value_at(3,1,4).
-value_at(3,2,1).
-*/
-
-/*
-value_at(0,0,2).
-value_at(1,1,4).
-value_at(1,2,3).
-value_at(2,1,2).
-value_at(2,2,1).
-value_at(3,3,3).
-*/
-
-/*
-value_at(0,1,1).
-value_at(0,3,4).
-value_at(1,0,4).
-value_at(2,3,2).
-value_at(3,0,2).
-value_at(3,2,3).
-*/
-
-value_at(0,4,1).
-value_at(0,5,5).
-value_at(0,6,6).
-value_at(0,8,9).
-value_at(1,1,2).
-value_at(1,3,7).
-value_at(1,8,1).
-value_at(2,0,9).
-value_at(2,7,7).
-value_at(3,1,1).
-value_at(3,4,9).
-value_at(3,5,8).
-value_at(3,8,5).
-value_at(4,2,6).
-value_at(4,6,9).
-value_at(5,0,3).
-value_at(5,3,5).
-value_at(5,4,7).
-value_at(5,7,6).
-value_at(6,1,4).
-value_at(6,8,2).
-value_at(7,0,2).
-value_at(7,5,4).
-value_at(7,7,9).
-value_at(8,0,7).
-value_at(8,2,5).
-value_at(8,3,1).
-value_at(8,4,2).
+value_at(0,3,6).
+value_at(0,6,8).
+value_at(0,8,2).
+value_at(1,2,6).
+value_at(1,3,9).
+value_at(1,4,5).
+value_at(2,0,7).
+value_at(2,8,9).
+value_at(3,2,9).
+value_at(3,3,8).
+value_at(3,7,4).
+value_at(4,1,5).
+value_at(4,3,3).
+value_at(4,5,1).
+value_at(4,7,2).
+value_at(5,1,6).
+value_at(5,5,5).
+value_at(5,6,3).
+value_at(6,0,6).
+value_at(6,8,3).
+value_at(7,4,3).
+value_at(7,5,6).
+value_at(7,6,5).
+value_at(8,0,4).
+value_at(8,2,1).
+value_at(8,5,9).
 
 
 
@@ -171,13 +124,14 @@ next_cell2(X, Y, NX, NY) :-
 add_value_at(X,Y,V) :-
 	is_value_at(X, Y, V), !
    	;
-   	assertz(deduced_value_at(X,Y,V)),
-	writestring("added deduced value "), write_line(X, Y, V).
+   	assertz(deduced_value_at(X,Y,V)).
+	/*writestring("added deduced value "), write_line(X, Y, V).*/
 
 retract_xy(X, Y, V) :-
 	deduced_value_at(X, Y, V),
    	retract(deduced_value_at(X, Y, V)),
-	writestring("retracted "), write_line(X, Y, V), !
+	/*writestring("retracted "), write_line(X, Y, V),*/
+	!
 ; 
 	true.
 
