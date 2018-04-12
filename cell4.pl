@@ -180,8 +180,15 @@ next_cell(X, Y, NX, NY) :-
 writestring([]).
 writestring([H|T]) :- put(H), writestring(T).
 
+set(V, Val) :- V is Val.
+
 print_horiz_line :-
-	writestring("+---+---+---+---+"), nl.
+	max_index(M),
+	index(I),
+	writestring("+---"),
+	I == M,
+	write('+'),
+	nl.
 
 print_row(Row) :-
 	index(Col),
