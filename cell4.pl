@@ -1,9 +1,18 @@
+/*
 value_at(0,1,2).
 value_at(0,3,1).
 value_at(1,2,2).
 value_at(2,1,4).
 value_at(3,0,3).
 value_at(3,2,4).
+*/
+
+value_at(0,0,1).
+value_at(0,3,3).
+value_at(1,1,4).
+value_at(2,2,3).
+value_at(3,0,4).
+value_at(3,3,2).
 
 :- dynamic(deduced_value_at/3).
 :- dynamic(retracted_cell/2).
