@@ -64,7 +64,7 @@ empty_cell(X, Y) :-
 	not(value_at(X,Y,_)),
 	not(deduced_value_at(X,Y,_)).
 
-next_cell2(X, Y, NX, NY) :-
+next_cell_to_process(X, Y, NX, NY) :-
 	empty_cell(X,Y), NX is X, NY is Y, !
 	;
 	max_index(M),
@@ -107,7 +107,7 @@ sudoku2(X, Y) :-
 	;
 	find_value_for(X, Y, V),
 	add_retract(X, Y, V),
-	next_cell2(X, Y, NX, NY),
+	next_cell_to_process(X, Y, NX, NY),
 	sudoku2(NX, NY).
 
 dec(N, D) :- D is N - 1.
