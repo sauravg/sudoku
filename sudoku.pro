@@ -1,33 +1,6 @@
-value_at(0,3,6).
-value_at(0,6,8).
-value_at(0,8,2).
-value_at(1,2,6).
-value_at(1,3,9).
-value_at(1,4,5).
-value_at(2,0,7).
-value_at(2,8,9).
-value_at(3,2,9).
-value_at(3,3,8).
-value_at(3,7,4).
-value_at(4,1,5).
-value_at(4,3,3).
-value_at(4,5,1).
-value_at(4,7,2).
-value_at(5,1,6).
-value_at(5,5,5).
-value_at(5,6,3).
-value_at(6,0,6).
-value_at(6,8,3).
-value_at(7,4,3).
-value_at(7,5,6).
-value_at(7,6,5).
-value_at(8,0,4).
-value_at(8,2,1).
-value_at(8,5,9).
 
 
-
-
+:- dynamic(value_at/3).
 :- dynamic(deduced_value_at/3).
 :- dynamic(retracted_cell/2).
 :- dynamic(pending_cell/2).
@@ -205,6 +178,7 @@ print_all_rows :-
 	Row == M.
    
 start :-
+	read_sudoku,
 	sudoku2(0,0),
 	print_all_rows,
 	print_horiz_line,
