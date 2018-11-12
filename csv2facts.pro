@@ -1,5 +1,3 @@
-:- initialization(start).
-
 maybe_read_again(Row, Col, MaxIndex) :-
 	integer(MaxIndex), 	Row > MaxIndex
 ;
@@ -26,12 +24,5 @@ process_char(C, Row, Col, NewRow, NewCol, MaxIndex) :-
 	/* Ignore whatever it is */
 	NewRow is Row, NewCol is Col.
 
-
-start :-
-	read_and_process(0, 0),
-	listing(value_at).
-
-
-writestring([]).
-writestring([H|T]) :- put(H), writestring(T).
-
+read_sudoku :-
+	read_and_process(0,0).
