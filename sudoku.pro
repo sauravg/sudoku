@@ -1,31 +1,10 @@
 
-
 :- dynamic(value_at/3).
 :- dynamic(deduced_value_at/3).
 :- dynamic(retracted_cell/2).
 :- dynamic(pending_cell/2).
 :- dynamic(forbidden/3).
 :- initialization(start).
-
-index(0).
-index(1).
-index(2).
-index(3).
-index(4).
-index(5).
-index(6).
-index(7).
-index(8).
-
-digit(1).
-digit(2).
-digit(3).
-digit(4).
-digit(5).
-digit(6).
-digit(7).
-digit(8).
-digit(9).
 
 /* GNU prolog doesn't seem to define the 'not' predicate mentioned in Clocksin & Mellish */
 not(P) :- \+(P).
@@ -150,38 +129,13 @@ next_cell(X, Y, NX, NY) :-
 	max_index(M),
 	X @< M, inc(X, X2), NX is X2, NY is 0, !.
 	
-writestring([]).
-writestring([H|T]) :- put(H), writestring(T).
-
 set(V, Val) :- V is Val.
 
-print_horiz_line :-
-	max_index(M),
-	index(I),
-	writestring("+---"),
-	I == M,
-	write('+'),
-	nl.
-
-print_row(Row) :-
-	index(Col),
-	get_value_at(Row, Col, V),
-	write('|'), write(' '), write(V), write(' '), 
-	max_index(M),
-	Col == M.
-
-print_all_rows :-
-	index(Row),
-	print_horiz_line,
-	print_row(Row), write('|'), nl,
-	max_index(M),
-	Row == M.
-   
 start :-
 	read_sudoku,
 	sudoku2(0,0),
-	print_all_rows,
-	print_horiz_line,
+	max_index(M),
+	print_sudoku(M),
 	halt
 	;
 	any_cell_empty(X, Y),
