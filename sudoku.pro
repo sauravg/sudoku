@@ -16,7 +16,7 @@ block_size(3).
 board_size(N) :- block_size(S), N is S*S.
 max_index(M) :- board_size(S), M is S - 1.
 
-base(A, V) :- block_size(Max), V is Max*(A//Max).
+base(A, V) :- block_size(Max), V is (A//Max).
 
 in_same_block(A, B) :- base(A, BaseA), base(B, BaseB), BaseA == BaseB.
 
