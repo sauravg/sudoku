@@ -73,6 +73,7 @@ add_value_at(X,Y,V) :-
 
 remove_value_at(X, Y, V) :-
 	retract(deduced_value_at(X, Y, V)).
+	/*writestring("removed deduced value "), write_line(X, Y, V).*/
 
 /* If the cell has a fixed value, do nothing, and don't
  * revist, i.e. cut backtracking */
