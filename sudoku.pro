@@ -92,23 +92,34 @@ remove_later_forbiddens(X, Y) :-
 	retractall(forbidden(NX, NY, _)),
 	remove_later_forbiddens(NX, NY), ! ; true.
 
+/* nothign to do if the same value is already there, either
+ * fixed or dynamic */
 add_retract(X, Y, V) :-
-	value_at(X, Y, V), !
-;
-	add_value_at(X, Y, V)
-;
+	value_at(X, Y, V), !.
+
+/* But if not, put it there */
+add_retract(X, Y, V) :-
+	add_value_at(X, Y, V).
+
+/* We are backgracking. Remove the value and mark it as forbidden for that
+ * cell. Also remove all subsequent forbidden values, which were forbidden
+ * because (X,Y) was V */
+add_retract(X, Y, V) :-
 	retract_xy(X, Y, V),
 	asserta(forbidden(X, Y, V)),
 	remove_later_forbiddens(X, Y).
 
-sudoku2(X, Y) :-
+/* row index <= [0, board_size).
+ * row == board_size => all rows filled */
+process_cell(X, _) :-
 	board_size(S),
-	X == S
-	;
+	X == S. /*; Y == S.*/
+
+process_cell(X, Y) :-
 	find_value_for(X, Y, V),
 	add_retract(X, Y, V),
 	next_cell_to_process(X, Y, NX, NY),
-	sudoku2(NX, NY).
+	process_cell(NX, NY).
 
 dec(N, D) :- D is N - 1.
 inc(N, I) :- I is N + 1.
@@ -133,7 +144,7 @@ set(V, Val) :- V is Val.
 
 start :-
 	read_sudoku,
-	sudoku2(0,0),
+	process_cell(0,0),
 	max_index(M),
 	print_sudoku(M),
 	halt
