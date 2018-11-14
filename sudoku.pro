@@ -65,7 +65,6 @@ next_cell_to_process(X, Y, NX, NY) :-
 	max_index(M),
 	Y @< M, NX is X, NY is Y + 1, !
 	;
-	max_index(M),
 	NX is X + 1, NY is 0, !.
 	
 add_value_at(X,Y,V) :-
