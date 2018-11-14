@@ -21,11 +21,11 @@ neighbour(X, Y, NX, NY) :-
    	in_same_block(X, NX),
    	in_same_block(Y, NY).
 
-filled(X,Y) :- value_at(X,Y,_), ! ; deduced_value_at(X,Y,_).
+filled(X,Y) :- value_at(X,Y,_), ! ; deduced_value_at(X,Y,_), !.
 
 empty(X,Y) :- not(filled(X,Y)).
 
-is_value_at(X,Y, V) :- value_at(X,Y,V), ! ; deduced_value_at(X,Y,V).
+is_value_at(X,Y, V) :- value_at(X,Y,V), ! ; deduced_value_at(X,Y,V), !.
 
 unique_in_row(Row, Val) :-
 	not(is_value_at(Row, _, Val)).
