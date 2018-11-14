@@ -68,10 +68,10 @@ next_cell_to_process(X, Y, NX, NY) :-
 	empty_cell(X,Y), NX is X, NY is Y, !
 	;
 	max_index(M),
-	Y @< M, NX is X, inc(Y, Y2), NY is Y2, !
+	Y @< M, NX is X, NY is Y + 1, !
 	;
 	max_index(M),
-	inc(X, X2), NX is X2, NY is 0, !.
+	NX is X + 1, NY is 0, !.
 	
 add_value_at(X,Y,V) :-
 	is_value_at(X, Y, V), !
@@ -121,9 +121,6 @@ process_cell(X, Y) :-
 	next_cell_to_process(X, Y, NX, NY),
 	process_cell(NX, NY).
 
-dec(N, D) :- D is N - 1.
-inc(N, I) :- I is N + 1.
-
 write_line(X, Y, V) :-
 	write(X), put_char(','), write(Y), put_char(','), write(V), nl.
 
@@ -135,13 +132,11 @@ get_value_at(X, Y, V) :- value_at(X, Y, V) ; deduced_value_at(X, Y, V).
 
 next_cell(X, Y, NX, NY) :-
 	max_index(M),
-	Y @< M, NX is X, inc(Y, Y2), NY is Y2, !
+	Y @< M, NX is X, NY is Y + 1, !
 	;
 	max_index(M),
-	X @< M, inc(X, X2), NX is X2, NY is 0, !.
+	X @< M, NX is X + 1, NY is 0, !.
 	
-set(V, Val) :- V is Val.
-
 start :-
 	read_sudoku,
 	process_cell(0,0),
