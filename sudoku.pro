@@ -69,7 +69,7 @@ add_value_at(X,Y,V) :-
    	assertz(deduced_value_at(X,Y,V)).
 	/*writestring("added deduced value "), write_line(X, Y, V).*/
 
-retract_xy(X, Y, V) :-
+remove_value_at(X, Y, V) :-
 	deduced_value_at(X, Y, V),
    	retract(deduced_value_at(X, Y, V)),
 	/*writestring("retracted "), write_line(X, Y, V),*/
@@ -77,19 +77,19 @@ retract_xy(X, Y, V) :-
 ; 
 	true.
 
-/* nothign to do if the same value is already there, either
- * fixed or dynamic */
-add_retract(X, Y, V) :-
+/* If the cell has a fixed value, do nothing, and don't
+ * revist, i.e. cut backtracking */
+save_revertible(X, Y, V) :-
 	value_at(X, Y, V), !.
 
 /* But if not, put it there */
-add_retract(X, Y, V) :-
+save_revertible(X, Y, V) :-
 	add_value_at(X, Y, V).
 
 /* We are backgracking. Remove the value deduced previously and fail,
  * so a new value for this cell would be retried. */
-add_retract(X, Y, V) :-
-	retract_xy(X, Y, V),
+save_revertible(X, Y, V) :-
+	remove_value_at(X, Y, V),
 	fail.
 
 /* row index <= [0, board_size).
@@ -100,7 +100,7 @@ process_cell(X, _) :-
 
 process_cell(X, Y) :-
 	find_value_for(X, Y, V),
-	add_retract(X, Y, V),
+	save_revertible(X, Y, V),
 	next_cell_to_process(X, Y, NX, NY),
 	process_cell(NX, NY).
 
