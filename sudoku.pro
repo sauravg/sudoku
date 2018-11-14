@@ -46,10 +46,12 @@ avail(X, Y, V) :-
 	unique_in_column(Y, V),
 	V @>= 1, board_size(S), V @=< S.
 
+% if X,Y has a fixed value, just return it and never reconsider
 find_value_for(X,Y, V) :-
-	is_value_at(X,Y,V), ! % if X,Y has a value, just return it and kill backtracking over it
-   	;
-	digit(V1), avail(X, Y, V1), V is V1.
+	value_at(X,Y,V), !.
+
+find_value_for(X,Y, V) :-
+	digit(V), avail(X, Y, V).
 
 empty_cell(X, Y) :-
 	not(value_at(X,Y,_)),
@@ -70,12 +72,7 @@ add_value_at(X,Y,V) :-
 	/*writestring("added deduced value "), write_line(X, Y, V).*/
 
 remove_value_at(X, Y, V) :-
-	deduced_value_at(X, Y, V),
-   	retract(deduced_value_at(X, Y, V)),
-	/*writestring("retracted "), write_line(X, Y, V),*/
-	!
-; 
-	true.
+	retract(deduced_value_at(X, Y, V)).
 
 /* If the cell has a fixed value, do nothing, and don't
  * revist, i.e. cut backtracking */
