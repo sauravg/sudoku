@@ -1,8 +1,6 @@
 
 :- dynamic(value_at/3).
 :- dynamic(deduced_value_at/3).
-:- dynamic(retracted_cell/2).
-:- dynamic(pending_cell/2).
 :- initialization(start).
 
 /* GNU prolog doesn't seem to define the 'not' predicate mentioned in Clocksin & Mellish */
@@ -112,13 +110,6 @@ any_cell_empty(X, Y) :-
 
 get_value_at(X, Y, V) :- value_at(X, Y, V) ; deduced_value_at(X, Y, V).
 
-next_cell(X, Y, NX, NY) :-
-	max_index(M),
-	Y @< M, NX is X, NY is Y + 1, !
-	;
-	max_index(M),
-	X @< M, NX is X + 1, NY is 0, !.
-	
 start :-
 	read_sudoku,
 	process_cell(0,0),
