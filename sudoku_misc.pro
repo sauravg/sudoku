@@ -18,3 +18,8 @@ digit(7).
 digit(8).
 digit(9).
 
+not(P) :- \+(P).
+not_both(A, B) :- not(A), ! ; not(B), !.
+
+not_equal(A, B) :- B \== A.
+

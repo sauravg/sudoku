@@ -7,11 +7,6 @@
 :- initialization(start).
 
 /* GNU prolog doesn't seem to define the 'not' predicate mentioned in Clocksin & Mellish */
-not(P) :- \+(P).
-not_both(A, B) :- not(A), ! ; not(B), !.
-
-not_equal(A, B) :- B \== A.
-
 block_size(3).
 board_size(N) :- block_size(S), N is S*S.
 max_index(M) :- board_size(S), M is S - 1.
@@ -113,16 +108,13 @@ add_retract(X, Y, V) :-
  * row == board_size => all rows filled */
 process_cell(X, _) :-
 	board_size(S),
-	X == S. /*; Y == S.*/
+	X == S.
 
 process_cell(X, Y) :-
 	find_value_for(X, Y, V),
 	add_retract(X, Y, V),
 	next_cell_to_process(X, Y, NX, NY),
 	process_cell(NX, NY).
-
-write_line(X, Y, V) :-
-	write(X), put_char(','), write(Y), put_char(','), write(V), nl.
 
 any_cell_empty(X, Y) :-
 	index(X), index(Y),

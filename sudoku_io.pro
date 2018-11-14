@@ -29,3 +29,6 @@ print_sudoku(MaxIndex) :-
 writestring([]).
 writestring([H|T]) :- put(H), writestring(T).
 
+write_line(X, Y, V) :-
+	write(X), put_char(','), write(Y), put_char(','), write(V), nl.
+
